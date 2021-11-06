@@ -31,5 +31,12 @@ O Amazon S3
  - 버킷만들기(그 후 폴더만들기, 업로드/다운로드 모두 가능, 퍼블릭으로 설정하면 해당 url로 접근가능함)
  - 정적페이지파일(html)에 대해서도 웹서버인것처럼 제공함. 
 
+O AWS Route 53
+ - 100% 가용성을 보장하는, DNS 서비스
+
+O AWS Virtual Private Cloud.
+ - 각 서버를 연결하기 위한 사설 네트워크망. 용도에 따라 subnet으로 나눔(Public subnet/Private subnet)
+ - 3-Tier Web Application Architecrue.(Route 53 -> Web서버인 public subnet->앱서버인 private subnet)
+
 --------------------------------
 # 초보를 위한 도커 안내서
