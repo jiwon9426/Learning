@@ -33,6 +33,7 @@ O Amazon S3
 
 O AWS Route 53
  - 100% 가용성을 보장하는, DNS 서비스
+ - 레코드 세트를 생성해서 원하는 url 주소로 설정할 수 있음
 
 O AWS Virtual Private Cloud.
  - 각 서버를 연결하기 위한 사설 네트워크망. 용도에 따라 subnet으로 나눔(Public subnet/Private subnet)
