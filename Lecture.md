@@ -56,3 +56,9 @@ O 쿠버네티스
 O 도커 컴포즈
  - docker-compose.yml 파일로 도커 컴포즈를 관리함.
  - docker-compose up <-> docker-copose down
+
+O 도커 이미지
+ - 새로운 상태를 이미지로 저장함(ubuntu -> ubuntu + git 을 이미지로 만듦)
+ - 도커이미지 만드는 명령어 : docker build -t 이름공간/이미지이름:태그 .
+ - .dockerignore 도 있음
+ - 그런데 이러한 서버에서 작업하는 것들을 Dockerfile로도 관리할 수 있음.
