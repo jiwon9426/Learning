@@ -52,3 +52,7 @@ O 쿠버네티스
  - 스케줄링 : 컨테이너를 적당한 서버에 배표
  - 클러스터링 : 여러개의 서버를 하나의 서버처럼 사용
  - 서비스 디스커버리 : 서비스를 찾아주는 기능
+ 
+O 도커 컴포즈
+ - docker-compose.yml 파일로 도커 컴포즈를 관리함.
+ - docker-compose up <-> docker-copose down
