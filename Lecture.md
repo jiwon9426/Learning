@@ -62,3 +62,8 @@ O 도커 이미지
  - 도커이미지 만드는 명령어 : docker build -t 이름공간/이미지이름:태그 .
  - .dockerignore 도 있음
  - 그런데 이러한 서버에서 작업하는 것들을 Dockerfile로도 관리할 수 있음.
+
+
+O 이미지 저장소
+ - push 를 하면 docker hub 에 띄우고 pull을 하면 불러오게 됨
+
