@@ -67,3 +67,49 @@ O 도커 이미지
 O 이미지 저장소
  - push 를 하면 docker hub 에 띄우고 pull을 하면 불러오게 됨
 
+--------------------------------
+# TDC
+
+O 딥러닝 Basic
+-Layer : 레이어 중 데이터 들어오는 첫 번째 레이어 input layer, 결과 출력하는 마지막 레이어를 output layer, 이 두 레이어 사이에 있는 레이어는 모두 hidden layer 임. 
+CF. Softmax함수: output 레이어에 적용되는 함수. 스코어에 대한 총합을 1로 맞추어서, 클래스간 상대적인 비교가 가능하게 가는 것
+
+- Activation function(활성화 함수): 인공신경망의 각 뉴런이 데이터를 가중합하고 난 뒤 취하는 함수 ex.sigmoid, relu
+. Sigmoid : 0~1사이의 실수로 결과출력, 가중치가 너무 크거나 작으면 의미없게 됨(곡선)
+. Relu : 계산간편, 0 또는 1로만 결과를 출력함(직선)
+
+- Loss함수: 모범답안(데이터로 주어짐)과 예측값(모델이 입력 데이터로 추론함)의 차이를 정량화하는 함수. 목적은 Loss가 가능한 한 작아지도록 하는 파라미터를 찾는 것임. Ex.MSE, NLL
+. MSE : 전통적, sigmoid 랑 같이쓰면 너무 느림
+. NLL : =Cross Entropy loss, 분류할때 유용, softmax랑 같이쓰면 특히 효과
+1.	sparse_categorical_crossentropy: 라벨이 정수형태일 때
+2.	CategoricalCrossentropy: Loss 정보가 one-hot encoding([0, 1] 혹은 [1, 0] 형태)
+
+- Optimizer : 파라미터를 더 좋은 최적 값으로 업데이트해주는 역할을 수행
+. Momentum 계열의 optimizer : 과거의 파라미터 업데이트 내역을 누적, 진행하던 방향성을 반영하여 빠르게 최적점으로 업데이트 ex.SGD
+. Adaptive 계열의 optimizer: learning rate를 학습진행에 따라 유연하게 설정 ex.ADAM
+
+-오버피팅이 발생했을 때 해결방안 : 
+ 1. early stopping(조기종료) 2.Dropout(드롭 아웃). Dense 아래에 놓어야함.
+
+
+O CNN
+- CNN =  Feature Extractor(Convolution+ Pooling) + Classifier(실제로 분류, hidden과 output)
+. Convolution은 이미지의 특징을 추출하는 역할, Pooling은 파라미터 자체를 줄여주는 역할
+. Feature Extractor= Conv2D(계층이 쌓일수록 좋음) + Maxpooling(2x2 filter 사이즈를 유지좋음.) 레이어로 구성. 이 둘을 번갈아 총 3~4 계층이 좋음
+- activation은 softmax, relu 를 사용해야함.
+
+- convolution 예시
+Sequential([
+         #### ANSWER #### 
+         Conv2D(30, kernel_size=10, activation='relu', input_shape=(100, 100, 1))
+         ################
+])
+->Output_shape(91, 91, 30)
+
+- pooling 예시
+model_mp2 = Sequential([
+      MaxPool2D(pool_size=(3, 3), input_shape=(30, 30, 3))
+])
+->Output_shape(10, 10, 3) 
+/ 여기에는 input_shape 안 넣어도 됨. 첫번째 conv에만 넣으면 됨
+
