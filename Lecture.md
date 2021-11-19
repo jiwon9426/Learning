@@ -113,3 +113,17 @@ model_mp2 = Sequential([
 ->Output_shape(10, 10, 3) 
 / 여기에는 input_shape 안 넣어도 됨. 첫번째 conv에만 넣으면 됨
 
+O RNN ->개선된 유닛이 LSTM, GRU 임
+
+- 자연어 처리 Flow : 
+1.Tokenizing (=Parsing) 
+2.사전 만들기(이때 특수 token 으로 pad=빈부분 처리용와 oov=처음보는글자 가 있음)
+3.input 만들기
+4.embedding & rnn학습
+  . train 과 validation 으로 나누어서 학습함.
+  . LSTM은 순차적으로 들어오는 데이터처리에 적합, 보다 정보가 장기적으로 전달
+  . 분류가 아닌 예측이면, 마지막 dense레이어의 activation은 지정하면 안됨, loss도 MAE 함수 사용해야하고, Optimizer는 아무거나, Metircs는 MAE로 지정해야함.
+  . 여러개의 LSTM 레이어를 쌓기 위해서는 reutrn_sequences=True 옵션을 추가
+     예를들어, tf.keras.layers.LSTM(60, return_sequences=True),
+
+
