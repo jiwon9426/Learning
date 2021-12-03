@@ -30,11 +30,19 @@ Chap1. 아파치 스파크 소개
 Chap2. 아파치 스파크 다운로드 및 시작
 -	Driver -> Job-> Stage -> Task
 
-Chap4. 스파크SQL과 데이터프레임
+Chap4. 스파크SQL과 데이터프레임 API 상호운영
 -	Central metastore에 테이블과 데이터에 대한 정보가 저장됨(ex.스키마, 설명, 테이블명, 컬럼명 등 ) 스파크는 디폴트로 Apache Hive metastore를 사용함
 -	스파크는 두가지 종류의 테이블이 있음 ->managed(메타데이터와 파일스토어에 있는 데이터 둘다 영향.) and unmanaged(메타데이터만 영향)
 -	View는 일시적인 것으로 스파크 애플리케이션을 종료하면 사라지는데, global 하거나 session-scoped할 수 있다. 만드는 방법은 테이블 create하는 것과 비슷한 문법. 만들고나면 테이블처럼 쿼리할 수 있지만, 차이점은 실제로는 data를 hold 하지 않는 다는 것. 주의점은 global을 만들 때에는 global_temp.<view_name> 이렇게 prefix 반드시 붙여주어야 함.
 -	Parquet은 스파크에서 쓰는 default data source이다. 효율성이 좋아 빅데이터 처리 프레임워크와 플랫폼에서 자주 사용되는 오픈소스 포맷. 그 밖에도 스파크에서 쓰는 파일포맷으로 json, csv, avro 등이 있음
+
+Chap5. 스파크SQL과 데이터프레임 : 외부 데이터소스와의 interacting
+-	Data source를 파티셔닝하는게 중요함. 
+
+Chap9. 아파치 스파크로 데이터레이크 빌딩
+-	레이크하우스는 기존 데이터베이스와 데이터레이크의 한계를 완화하기 위해 만들어졌음.
+-	예시인 Delta lake는 file-based 오픈 소스 스토리지임.
+
 
 --------------------------------
 # Information
