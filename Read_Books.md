@@ -15,6 +15,28 @@
 2. 그림으로 배우는 HTTP & Network Basic
   
 --------------------------------
+# DE
+1. 러닝 스파크
+  
+Chap1. 아파치 스파크 소개 
+-	아파치 스파크란, 온프레미스나 클라우드 환경에서 large 스케일의 분산 데이터처리를 위한 통합 엔진임.
+-	1.스피드, 2.사용이 쉬움, 3.모듈성, 4.확장성을 중요하게 여김.
+-	아파치 스파크의 components : 
+1) Spark SQL (rdbms나 파일형구조인 csv, text, json, parquet 데이터를 읽을 수 있음. 자바, 파이썬, 스칼라 등과 함께 Sql 엔진처럼 sql쿼리도 같이 쓸수 있음.) 
+2)Spark Mlib (머신러닝 알고리즘)
+3)Spark structured Streaming(빅데이터 개발자들이 static data와 실시간 데이터를 같이 다뤄야하기 때문에 나옴)
+4)Graph X (그래프 알고리즘)
+
+Chap2. 아파치 스파크 다운로드 및 시작
+-	Driver -> Job-> Stage -> Task
+
+Chap4. 스파크SQL과 데이터프레임
+-	Central metastore에 테이블과 데이터에 대한 정보가 저장됨(ex.스키마, 설명, 테이블명, 컬럼명 등 ) 스파크는 디폴트로 Apache Hive metastore를 사용함
+-	스파크는 두가지 종류의 테이블이 있음 ->managed(메타데이터와 파일스토어에 있는 데이터 둘다 영향.) and unmanaged(메타데이터만 영향)
+-	View는 일시적인 것으로 스파크 애플리케이션을 종료하면 사라지는데, global 하거나 session-scoped할 수 있다. 만드는 방법은 테이블 create하는 것과 비슷한 문법. 만들고나면 테이블처럼 쿼리할 수 있지만, 차이점은 실제로는 data를 hold 하지 않는 다는 것. 주의점은 global을 만들 때에는 global_temp.<view_name> 이렇게 prefix 반드시 붙여주어야 함.
+-	Parquet은 스파크에서 쓰는 default data source이다. 효율성이 좋아 빅데이터 처리 프레임워크와 플랫폼에서 자주 사용되는 오픈소스 포맷. 그 밖에도 스파크에서 쓰는 파일포맷으로 json, csv, avro 등이 있음
+
+--------------------------------
 # Information
   
 1. 2020 ADsp 데이터분석 준전문가
