@@ -126,4 +126,9 @@ O RNN ->개선된 유닛이 LSTM, GRU 임
   . 여러개의 LSTM 레이어를 쌓기 위해서는 reutrn_sequences=True 옵션을 추가
      예를들어, tf.keras.layers.LSTM(60, return_sequences=True),
 
+--------------------------------
+# NoSQL DB (몽고DB/mongodb) 기본부터 파이썬/데이터분석 활용까지!
 
+O 실시간으로 많은 양의 데이터를 저장하기 위해서는, RDBMS보다 NoSQL 형태가 좋음
+
+O 몽고DB는 Json 기반의 document DB 이다.
