@@ -16,3 +16,23 @@
   . 디멘전 데이터 : 정보 조회 시, 조회관점이 되는 데이터 ex.고객별, 년도별 매출액에서 고객과 년도
   . 팩트 데이터 : 조회하고자 하는 수치 데이터 ex.고객별, 년도별 매출액에서 매출액
   . 트랜잭션 데이터 : 조회하고자 하는 상세 목록 기준의 데이터 ex.고객별, 년도별 매출액을 집곟는 상세 매출전표리스트에서 매출전표리스트
+
+
+<DB 빅데이터 아키텍처>
+O AWS 빅데이터 아키텍처
+-전체 개요 : 크게 1.관리영역, 2.수집영역, 3.저장영역, 4.처리/분석영역이 있다.
+-1. 관리영역 : 
+ . airflow가 수집, 처리 Data Pipeline scheduler와 controler역할을 함. 
+ . 스케줄에 따라, Airflow package API(=Operator)로 aws 서비스를 액세스하거나, EC2 shell을 실행하거나, custom python module을 실행함
+-2. 수집영역 :
+ . Batch : airflow가 source database에 connect해서 데이터를 스토리지에 저장함, 
+           airflow가 sftp를 call하면 sftop가 source 스토리지파일을 EC2에 가져옴,
+           airflow가 Glue를 call하면 Data lake나 Data hub에 connect해서 데이터를 추출하여 스토리지에 저장함,
+           airflow가 S3간 연동을 통해 스토리지에 저장함
+-3. 저장영역 :
+ . 처리 단계에 따라 데이터를 스토리지에 파일형태로 저장하고 수명주기를 관리함.
+ . 스토리지는 Amazon S3이며, 수집/처리/분석 과정에서의 임시파일을 S3저장하기도 하고, L0/L1/L2를 S3에 구성하기도하고, L2를 처리/분석영역의 DW에 저장하기도함
+-4. 처리/분석영역 :
+ . Processing : spark 기반의 Glue를 통해 S3 데이터를 처리하고, S3 또는 DW에 저장함. 
+ . DW : Amazon Redshift를 사용함. L0/L1/L2를 redshift에 구성할 수도 있고, 데이터 변경이 필요한 L2만 redshift에 저장하기도함. Redshift에서 쿼리를 실행하여 처리 또는 분석결과 제공함.
+ . Analytics : 데이터분석툴이 DW를 엑세스하여 분석을 수항햄. 분석과정 또는 결과 저장에 S3스토리지를 액세스함
