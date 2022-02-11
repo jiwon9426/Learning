@@ -36,6 +36,7 @@ O AWS 빅데이터 아키텍처
          실행조건인 trigger_rule은 디폴트가 all_success이며, 이전의 모든 task가 success일 때 실행됨.
          실행순서를 정의하기 위해서는 task1 >> task2 와 같은 방법으로 할 수 있음.
 -2. 수집영역 :
+ . 크게 Batch와 Realtime 수집설계로 나뉜다. Batch는 airflow의 phthon API(=operator)로 수행하고, real time 수집은 Kinesis를 사용함
  . Batch : airflow가 source database에 connect해서 데이터를 스토리지에 저장함, 
            airflow가 sftp를 call하면 sftop가 source 스토리지파일을 EC2에 가져옴,
            airflow가 Glue를 call하면 Data lake나 Data hub에 connect해서 데이터를 추출하여 스토리지에 저장함,
