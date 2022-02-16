@@ -19,6 +19,7 @@
 
 
 <DB 빅데이터 아키텍처>
+
 O AWS 빅데이터 아키텍처
 -전체 개요 : 
  . 크게 1.관리영역, 2.수집영역, 3.저장영역, 4.처리/분석영역이 있다.
@@ -35,15 +36,25 @@ O AWS 빅데이터 아키텍처
  . Task? operator가 dag 실행 중 런타임에 호출되면 이를 task라고 표현함. ex.operator가 클래스라면 task는 인스턴스 개념임
          실행조건인 trigger_rule은 디폴트가 all_success이며, 이전의 모든 task가 success일 때 실행됨.
          실행순서를 정의하기 위해서는 task1 >> task2 와 같은 방법으로 할 수 있음.
+         
 -2. 수집영역 :
  . 크게 Batch와 Realtime 수집설계로 나뉜다. Batch는 airflow의 phthon API(=operator)로 수행하고, real time 수집은 Kinesis를 사용함
- . Batch : airflow가 source database에 connect해서 데이터를 스토리지에 저장함, 
+ . Batch : airflow가 source database에 connect해서 데이터를 스토리지에 저장함, =database에 conncet하여 테이블에 접근한 뒤, file 형태로 S3에 적재함
            airflow가 sftp를 call하면 sftop가 source 스토리지파일을 EC2에 가져옴,
            airflow가 Glue를 call하면 Data lake나 Data hub에 connect해서 데이터를 추출하여 스토리지에 저장함,
            airflow가 S3간 연동을 통해 스토리지에 저장함
+ . Realtime 수집 : Amazon Kinesis가 대표적(redshift, dynamoDB, Lambda등과 같은 다른 AWS 서비스와 통합하고 스트리밍 데이터수집과정을 단순화하였음
+                                          /실시간으로 스트리밍 데이터를 수집, 버퍼링 및 처리하고 또한 완전관리형 스트리밍 애플리케이션을 운영하여 인프라를 관리할 필요가 없음)
+                   Amazon Kinesis Data Streams? 실시간 분석을 위해 대규모로 스트리밍 데이터를 수집하기 위해 사용. 데이터가 수신되는 대로 처리 및 분석이 가능함.
+                                                for 데이터 스트림을 수집하여 처리분석하는 실시간 애플리케이션을 구축하고 싶을 때
+                   Amazon Kinesis Data Firehose? 스트리밍 데이터를 Data Lake, 데이터 스토어 및 분석도구에 로드하기 위해 사용.
+                                                for 데이터 스트림을 캡처 및 변환하여 AWS 데이터 스토어로 로드하고 싶을때
+                  -> 둘 중에 맞는 것 선택하면 됨.
+                  
 -3. 저장영역 :
  . 처리 단계에 따라 데이터를 스토리지에 파일형태로 저장하고 수명주기를 관리함.
  . 스토리지는 Amazon S3이며, 수집/처리/분석 과정에서의 임시파일을 S3저장하기도 하고, L0/L1/L2를 S3에 구성하기도하고, L2를 처리/분석영역의 DW에 저장하기도함
+
 -4. 처리/분석영역 :
  . Processing : spark 기반의 Glue를 통해 S3 데이터를 처리하고, S3 또는 DW에 저장함. 
  . DW : Amazon Redshift를 사용함. L0/L1/L2를 redshift에 구성할 수도 있고, 데이터 변경이 필요한 L2만 redshift에 저장하기도함. Redshift에서 쿼리를 실행하여 처리 또는 분석결과 제공함.
